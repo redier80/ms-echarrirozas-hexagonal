@@ -44,14 +44,16 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
     @Override
     public EmpleadoDto buscarEmpleadoOut(String numDoc) {
 
-        EmpleadoEntity empleadoEntity = empleadoRepository.findByNumDoc(numDoc)
+        /*EmpleadoEntity empleadoEntity = empleadoRepository.findByNumDoc(numDoc)
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado con numDoc: " + numDoc));
 
         if (empleadoEntity.isEstado()){
             return empleadoMapper.mapToDto(empleadoEntity);
         }else {
             throw new RuntimeException("Empleado con numero documento "+numDoc+" se encuentra en estado desactivo");
-        }
+        }*/
+        EmpleadoEntity empleadoEntity = empleadoRepository.findByNumDoc(numDoc).get();
+        return empleadoMapper.mapToDto(empleadoEntity);
 
     }
 

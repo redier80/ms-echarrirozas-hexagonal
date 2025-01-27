@@ -22,7 +22,7 @@ public class EmpleadoController {
     public ResponseEntity<ResponseBase<EmpleadoDto>> crearEmpleado(@PathVariable("dni") String dni,
                                                                   @RequestBody RequestEmpleado requestEmpleado){
 
-        //return ResponseEntity.ok(empleadoServiceIn.crearEmpleadoIn(dni, requestEmpleado));
+        /*
         try {
             EmpleadoDto empleadoGuardado = empleadoServiceIn.crearEmpleadoIn(dni, requestEmpleado);
             ResponseBase<EmpleadoDto> response = new ResponseBase<>(200, "Empleado registrado con éxito", empleadoGuardado);
@@ -31,6 +31,11 @@ public class EmpleadoController {
             ResponseBase<EmpleadoDto> errorResponse = new ResponseBase<>(500, "Error al guardar el empleado", null);
             return ResponseEntity.status(500).body(errorResponse);
         }
+        */
+        EmpleadoDto empleadoGuardado = empleadoServiceIn.crearEmpleadoIn(dni, requestEmpleado);
+        ResponseBase<EmpleadoDto> response = new ResponseBase<>(200, "Empleado registrado con éxito", empleadoGuardado);
+        return ResponseEntity.ok(response);
+
     }
     @GetMapping("/buscar/{numDoc}")
     public ResponseEntity<ResponseBase<EmpleadoDto>> buscarEmpleado(@PathVariable("numDoc") String numDoc){

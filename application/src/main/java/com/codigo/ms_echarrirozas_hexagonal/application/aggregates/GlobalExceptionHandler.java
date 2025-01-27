@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     //manejo del nullPointerException (HTTP 409)
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ResponseBase<String>> handleNullPointerException(NullPointerException ex){
-        ResponseBase<String> responseBase = new ResponseBase<>(409,"Recurso no encontrado",ex.getMessage());
+        ResponseBase<String> responseBase = new ResponseBase<>(409,"Recurso no encontrado", null);
         return ResponseEntity.status(HttpStatus.CONFLICT).body(responseBase);
     }
     // Manejo de IOException (HTTP 406)
