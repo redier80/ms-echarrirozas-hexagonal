@@ -83,7 +83,10 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
                                                 requestEmpleado.getTelefono(),
                                                 requestEmpleado.getCorreo(),
                                                 requestEmpleado.getDepartamento(),
-                                                requestEmpleado.getDireccion());
+                                                requestEmpleado.getDireccion(),
+                                                Constants.USUARIO,
+                                                new Timestamp(System.currentTimeMillis())
+                                               );
 
         EmpleadoEntity updatedEmpleado = empleadoRepository.findByNumDoc(numDoc)
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado después de la actualización"));

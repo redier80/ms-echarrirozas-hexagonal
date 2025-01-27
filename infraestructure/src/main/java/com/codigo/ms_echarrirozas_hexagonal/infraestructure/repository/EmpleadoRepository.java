@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public interface EmpleadoRepository extends JpaRepository<EmpleadoEntity, Long> 
                                       String direccion);*/
     @Transactional
     @Modifying
-    @Query("UPDATE EmpleadoEntity e SET e.edad = :edad, e.salario = :salario, e.cargo = :cargo, e.departamento = :departamento, e.correo = :correo, e.telefono = :telefono, e.direccion = :direccion WHERE e.numDoc = :numDoc")
+    @Query("UPDATE EmpleadoEntity e SET e.edad = :edad, e.salario = :salario, e.cargo = :cargo, e.departamento = :departamento, e.correo = :correo, e.telefono = :telefono, e.direccion = :direccion, e.usuaUpdate= :usuaUpdate, e.dateUpdate= :dateUpdate WHERE e.numDoc = :numDoc")
     void actualizarEmpleado(String numDoc,
                             int edad,
                             String cargo,
@@ -30,5 +31,8 @@ public interface EmpleadoRepository extends JpaRepository<EmpleadoEntity, Long> 
                             String telefono,
                             String correo,
                             String departamento,
-                            String direccion);
+                            String direccion,
+                            String usuaUpdate,
+                            Timestamp dateUpdate
+                            );
 }

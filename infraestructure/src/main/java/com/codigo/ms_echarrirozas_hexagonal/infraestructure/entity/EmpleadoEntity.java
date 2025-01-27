@@ -31,7 +31,7 @@ public class EmpleadoEntity {
     private String direccion;
     private Timestamp dateCrea;
     private String usuaCrea;
-    private Timestamp dateUdpate;
+    private Timestamp dateUpdate;
     private String usuaUpdate;
     private Timestamp dateDelete;
     private String usuaDelete;
