@@ -35,4 +35,9 @@ public interface EmpleadoRepository extends JpaRepository<EmpleadoEntity, Long> 
                             String usuaUpdate,
                             Timestamp dateUpdate
                             );
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE EmpleadoEntity e SET e.estado = false WHERE e.numDoc = :numDoc")
+    void eliminadoLogicoEmpleado(String numDoc);
 }

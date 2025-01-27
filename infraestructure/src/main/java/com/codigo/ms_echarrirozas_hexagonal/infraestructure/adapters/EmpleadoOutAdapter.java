@@ -47,7 +47,12 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
         EmpleadoEntity empleadoEntity = empleadoRepository.findByNumDoc(numDoc)
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado con numDoc: " + numDoc));
 
-        return empleadoMapper.mapToDto(empleadoEntity);
+        if (empleadoEntity.isEstado()){
+            return empleadoMapper.mapToDto(empleadoEntity);
+        }else {
+            throw new RuntimeException("Empleado con numero documento "+numDoc+" se encuentra en estado desactivo");
+        }
+
     }
 
     @Override
@@ -61,20 +66,6 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
 
     @Override
     public EmpleadoDto actualizarEmpleadoOut(String numDoc, RequestEmpleado requestEmpleado) {
-        /*Optional<EmpleadoEntity> empleadoEntityOptional = empleadoRepository.findByNumDoc(numDoc);
-        if (empleadoEntityOptional.isEmpty()) {
-            throw new RuntimeException("Empleado no encontrado con numDoc: " + numDoc);
-        }
-        EmpleadoEntity empleadoEntity = empleadoEntityOptional.get();
-        empleadoEntity.setEdad(requestEmpleado.getEdad());
-        empleadoEntity.setCargo(requestEmpleado.getCargo());
-        empleadoEntity.setCorreo(requestEmpleado.getCorreo());
-        empleadoEntity.setTelefono(requestEmpleado.getTelefono());
-        empleadoEntity.setDepartamento(requestEmpleado.getDepartamento());
-        empleadoEntity.setDireccion(requestEmpleado.getDireccion());
-
-        EmpleadoEntity updatedEmpleado = empleadoRepository.save(empleadoEntity);
-        return empleadoMapper.mapToDto(updatedEmpleado);*/
 
         empleadoRepository.actualizarEmpleado(numDoc,
                                                 requestEmpleado.getEdad(),
@@ -89,7 +80,7 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
                                                );
 
         EmpleadoEntity updatedEmpleado = empleadoRepository.findByNumDoc(numDoc)
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado después de la actualización"));
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado para la actualización"));
 
         // Convertir la entidad actualizada a DTO
         return empleadoMapper.mapToDto(updatedEmpleado);
@@ -97,8 +88,8 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
     }
 
     @Override
-    public void eliminarEmpleadoIn(String dni) {
-
+    public void eliminarEmpleadoOut(String numDoc) {
+        empleadoRepository.eliminadoLogicoEmpleado(numDoc);
     }
 
     private EmpleadoEntity getEntity(String dni, RequestEmpleado requestEmpleado){

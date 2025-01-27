@@ -10,5 +10,5 @@ public interface EmpleadoServiceOut {
      EmpleadoDto buscarEmpleadoOut(String dni);
      List<EmpleadoDto> mostrarTodosOut();
      EmpleadoDto actualizarEmpleadoOut(String numDoc, RequestEmpleado requestEmpleado);
-     void eliminarEmpleadoIn(String dni);
+     void eliminarEmpleadoOut(String numDoc);
 }

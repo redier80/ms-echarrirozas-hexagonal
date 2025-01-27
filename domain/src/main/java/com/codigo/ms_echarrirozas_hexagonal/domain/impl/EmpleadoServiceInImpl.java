@@ -52,6 +52,11 @@ public class EmpleadoServiceInImpl implements EmpleadoServiceIn {
 
     @Override
     public void eliminarEmpleadoIn(String dni) {
-
+        EmpleadoDto empleadoDto = buscarEmpleadoIn(dni);
+        if (Objects.nonNull(empleadoDto)){
+            empleadoServiceOut.eliminarEmpleadoOut(dni);
+        }else {
+            throw new RuntimeException("El empleado con dni "+dni+" no fue encontrado");
+        }
     }
 }
