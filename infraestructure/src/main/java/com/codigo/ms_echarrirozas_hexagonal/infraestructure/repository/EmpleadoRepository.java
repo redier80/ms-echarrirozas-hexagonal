@@ -38,6 +38,6 @@ public interface EmpleadoRepository extends JpaRepository<EmpleadoEntity, Long> 
 
     @Modifying
     @Transactional
-    @Query("UPDATE EmpleadoEntity e SET e.estado = false WHERE e.numDoc = :numDoc")
-    void eliminadoLogicoEmpleado(String numDoc);
+    @Query("UPDATE EmpleadoEntity e SET e.estado = false, e.usuaDelete= :usuario, e.dateDelete= :dateDelete WHERE e.numDoc = :numDoc")
+    void eliminadoLogicoEmpleado(String numDoc, String usuario, Timestamp dateDelete);
 }

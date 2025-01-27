@@ -89,7 +89,8 @@ public class EmpleadoOutAdapter implements EmpleadoServiceOut {
 
     @Override
     public void eliminarEmpleadoOut(String numDoc) {
-        empleadoRepository.eliminadoLogicoEmpleado(numDoc);
+        Timestamp dateDelete = new Timestamp(System.currentTimeMillis());
+        empleadoRepository.eliminadoLogicoEmpleado(numDoc, Constants.USUARIO, dateDelete);
     }
 
     private EmpleadoEntity getEntity(String dni, RequestEmpleado requestEmpleado){

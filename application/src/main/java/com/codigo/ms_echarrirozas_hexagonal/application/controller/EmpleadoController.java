@@ -60,8 +60,11 @@ public class EmpleadoController {
         return ResponseEntity.ok(response);
     }
     @DeleteMapping("/eliminar/{numDoc}")
-    public ResponseEntity<String>eliminarEmpleado(@PathVariable("numDoc") String numDoc){
+    public ResponseEntity<ResponseBase<Void>>eliminarEmpleado(@PathVariable("numDoc") String numDoc){
         empleadoServiceIn.eliminarEmpleadoIn(numDoc);
-        return ResponseEntity.ok("Empleado eliminado exitosamente");
+        ResponseBase<Void> response = new ResponseBase<>();
+        response.setCodigo(HttpStatus.OK.value());
+        response.setMensaje("Empleado eliminado correctamente");
+        return ResponseEntity.ok(response);
     }
 }
